@@ -1,0 +1,11 @@
+.deleteButton {
+  margin-left: 20px;
+}
+
+.contactItem {
+  margin-bottom: 5px;
+}
+
+.contactItem:last-of-type {
+  margin-bottom: 0;
+}
