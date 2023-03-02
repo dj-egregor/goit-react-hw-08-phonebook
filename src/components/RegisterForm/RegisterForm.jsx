@@ -104,7 +104,6 @@ const RegisterForm = () => {
   }, [error]);
 
   const handleSubmit = e => {
-    console.log('САБМИТ');
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
