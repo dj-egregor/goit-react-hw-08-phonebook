@@ -9,7 +9,15 @@ const HomePage = () => {
   return (
     <div className={css.wrapper}>
       <h1>Welcome to your Phonebook!</h1>
-      <h2>Now you will definitely not forget your contacts!</h2>
+      <p>
+        Welcome to Phone Book, the ultimate app for managing your contacts! With
+        Phone Book, you can easily create a new user account and login to start
+        organizing your contacts right away.
+      </p>
+      <p>
+        So why wait? Sign up for Phone Book today and start organizing your
+        contacts like a pro!
+      </p>
       {!isLoggedIn && (
         <>
           <p className={css.text}>
