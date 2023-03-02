@@ -1,0 +1,37 @@
+.contactItem {
+  list-style: none;
+  border-bottom: 1px solid rgb(182, 182, 182);
+  padding-bottom: 15px;
+}
+
+.contactItem {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.delBtn {
+  margin-left: 10px;
+}
+
+.btn {
+  margin-top: 15px;
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px 25px;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  color: rgb(255, 255, 255);
+  background-color: rgb(69 189 69);
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #28ab28;
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}

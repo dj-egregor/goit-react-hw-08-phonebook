@@ -1,11 +1,8 @@
-.deleteButton {
-  margin-left: 20px;
+.contactList {
+  padding: 5px;
 }
 
-.contactItem {
-  margin-bottom: 5px;
-}
-
-.contactItem:last-of-type {
-  margin-bottom: 0;
+.default {
+  font-size: 25px;
+  font-weight: bold;
 }

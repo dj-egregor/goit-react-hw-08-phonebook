@@ -1,0 +1,36 @@
+.wrapper {
+  padding: 15px;
+}
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+.link {
+  background-color: #d3d3d3;
+  border-radius: 5px;
+  color: green;
+  font-size: 20px;
+  font-weight: 500;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s linear;
+  width: 90px;
+  box-shadow: rgb(18 92 55 / 75%) 0px 2px 8px,
+    rgb(255 255 255 / 35%) 0px 1px inset, rgb(255 255 255 / 20%) 0px 10px inset,
+    rgb(255 255 255 / 25%) 0px 10px 20px inset,
+    rgb(18 92 55 / 75%) 0px -15px 30px inset;
+}
+
+.link:hover {
+  background-color: green;
+  color: lightgray;
+  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+    10px 10px 15px rgba(70, 70, 70, 0.12),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+    inset 10px 10px 15px rgba(70, 70, 70, 0.12);
+}

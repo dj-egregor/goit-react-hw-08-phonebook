@@ -1,34 +1,32 @@
+import { useSelector } from 'react-redux';
+
 import css from './ContactList.module.css';
+import ContactItem from './ContactItem';
+import { getFilteredContacts } from 'redux/selectors';
 
-import { useSelector, useDispatch } from 'react-redux';
-
-import { deleteContact } from 'redux/contacts/contacts-operations';
-import { selectFilteredContacts } from 'redux/contacts/contacts-selectors';
+import { useFetchContactsQuery } from 'redux/contactsSlice';
+import { getFilter } from 'redux/selectors';
 
 const ContactList = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(selectFilteredContacts);
+  const filter = useSelector(getFilter);
 
-  const onDeleteContact = id => {
-    dispatch(deleteContact(id));
-  };
-
+  const { data: contacts, isLoading, error } = useFetchContactsQuery();
   return (
-    <ul>
-      {contacts.map(contact => (
-        <li className={css.contactItem} key={contact.id}>
-          <span>{contact.name}: </span>
-          <span>{contact.phone}</span>
-          <button
-            className={css.deleteButton}
-            type="button"
-            onClick={() => onDeleteContact(contact.id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
+    <>
+      {isLoading && <p className={css.default}>...loading</p>}
+      {error && (
+        <p className={css.default}>
+          Sorry, something went wrong, please try again later!
+        </p>
+      )}
+      {contacts && contacts.length === 0 && <p>There is no contact!</p>}
+      <ul className={css.contactList}>
+        {contacts &&
+          getFilteredContacts(contacts, filter).map(({ id, name, number }) => (
+            <ContactItem key={id} name={name} number={number} id={id} />
+          ))}
+      </ul>
+    </>
   );
 };
 

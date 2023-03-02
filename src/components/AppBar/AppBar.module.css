@@ -1,0 +1,48 @@
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid rgb(196, 196, 196);
+}
+/* ----------global styles for link---------------*/
+
+.link:global(.active) {
+  color: rgb(255 241 0);
+}
+
+.link:not(:last-child) {
+  margin-right: 20px;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  color: rgb(255, 255, 255);
+  background-color: rgb(69 189 69);
+}
+
+.link:hover,
+.link:focus {
+  background-color: #28ab28;
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+@media screen and (max-width: 580px) {
+  .link:last-child {
+    margin-top: 20px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+}
