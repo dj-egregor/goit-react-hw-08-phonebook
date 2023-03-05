@@ -1,32 +1,100 @@
 import { PropTypes } from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
 import { RotatingLines } from 'react-loader-spinner';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { notifyDeliteContact } from 'utils/notification';
-import { useDeleteContactMutation } from 'redux/contactsSlice';
+import ButtonStyled from '../../shared/ButtonStyled/ButtonStyled';
+import {
+  useDeleteContactMutation,
+  useUpdateContactMutation,
+} from 'redux/contactsSlice';
 import css from './ContactItem.module.css';
 
 const ContactItem = ({ id, name, number }) => {
-  const [deleteContact, { isLoading, isSuccess }] = useDeleteContactMutation();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedName, setEditedName] = useState(name);
+  const [editedNumber, setEditedNumber] = useState(number);
+
+  const [deleteContact, { isLoading: isDeleting, isSuccess: isDeleted }] =
+    useDeleteContactMutation();
+  const [updateContact, { isLoading: isUpdating, isSuccess: isUpdated }] =
+    useUpdateContactMutation();
 
   useEffect(() => {
-    if (isSuccess) {
-      notifyDeliteContact();
+    if (isDeleted) {
+      toast.success('Contact has been deleted!');
     }
-  }, [isSuccess]);
+    if (isUpdated) {
+      setIsEditing(false);
+      toast.success('Contact has been updated!');
+    }
+  }, [isDeleted, isUpdated]);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    setEditedName(name);
+    setEditedNumber(number);
+  };
+
+  const handleSaveClick = () => {
+    updateContact({ id, name: editedName, number: editedNumber });
+  };
+
+  const handleDeleteClick = () => {
+    if (window.confirm('Are you sure you want to delete this contact?')) {
+      deleteContact(id);
+    }
+  };
+
+  const handleChange = e => {
+    if (e.target.name === 'name') {
+      setEditedName(e.target.value);
+    } else if (e.target.name === 'number') {
+      setEditedNumber(e.target.value);
+    }
+  };
 
   return (
     <li className={css.contactItem}>
-      {name}: <span>{number}</span>
-      <button
-        onClick={() => deleteContact(id)}
-        disabled={isLoading}
-        className={css.btn}
-      >
-        {isLoading && <RotatingLines height="20" width="20" />}
-        Delete
-      </button>
+      {isEditing ? (
+        <>
+          <input
+            type="text"
+            name="name"
+            value={editedName}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="number"
+            value={editedNumber}
+            onChange={handleChange}
+          />
+          <div>
+            <ButtonStyled onClick={handleSaveClick} disabled={isUpdating}>
+              {isUpdating && <RotatingLines height="20" width="20" />}
+              Save
+            </ButtonStyled>
+            <ButtonStyled onClick={handleCancelClick}>Cancel</ButtonStyled>
+          </div>
+        </>
+      ) : (
+        <>
+          <span>{name}:</span> <span>{number}</span>
+          <div>
+            <ButtonStyled onClick={handleEditClick}>Edit</ButtonStyled>
+            <ButtonStyled onClick={handleDeleteClick} disabled={isDeleting}>
+              {isDeleting && <RotatingLines height="20" width="20" />}
+              Delete
+            </ButtonStyled>
+          </div>
+        </>
+      )}
     </li>
   );
 };

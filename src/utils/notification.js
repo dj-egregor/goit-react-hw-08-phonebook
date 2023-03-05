@@ -11,3 +11,6 @@ export const serverError = () =>
 export const notifyAddContact = () => toast.success('Contact added!');
 
 export const notifyDeliteContact = () => toast.info('Contact deleted!');
+
+export const notifyUpdateContact = () =>
+  toast.success('The contact has been successfully updated!');
